@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kalkulator IPK Mahasiswa</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar">
+        <div class="brand-wrap">
+          <div class="brand-mark" aria-hidden="true">
+            <svg viewBox="0 0 32 32">
+              <path d="m3 12 13-7 13 7-13 7-13-7Z" />
+              <path d="M9 15.2v6.1c4.5 3.2 9.5 3.2 14 0v-6.1" />
+              <path d="m12.5 12.5 2.4 2.4 4.8-5" />
+              <path d="M29 12v7" />
+            </svg>
+          </div>
+          <div>
+            <h1>IPKalkulator</h1>
+          </div>
+        </div>
+      </header>
+
+      <main>
+        <section class="page-panel" id="tasksPage" aria-labelledby="tasksHeading">
+          <div class="page-intro">
+            <h2 id="tasksHeading">Kalkulator IPK & Kelola Mata Kuliah</h2>
+            <p class="intro-copy">Hitung Indeks Prestasi Kumulatif/Semester dengan mudah dan cepat.</p>
+          </div>
+
+          <form id="ipkForm" class="task-form" novalidate>
+            <div class="field-row">
+              <label class="field-group">
+                <span>Nama Mata Kuliah</span>
+                <input id="courseName" type="text" maxlength="60" placeholder="Contoh: Pemrograman Visual" aria-describedby="errorName" />
+                <small id="errorName" class="error-msg" aria-live="polite"></small>
+              </label>
+            </div>
+
+            <div class="field-row two-columns">
+              <label class="field-group">
+                <span>Nilai Huruf</span>
+                <select id="courseGrade">
+                  <option value="4.0">A</option>
+                  <option value="3.0">B</option>
+                  <option value="2.0">C</option>
+                  <option value="0.0">D</option>
+                </select>
+                <div id="gradePreview" class="grade-preview grade-a" aria-live="polite">
+                  <strong id="gradePreviewMark">A</strong>
+                  <span id="gradePreviewDescription" hidden></span>
+                </div>
+              </label>
+
+              <label class="field-group">
+                <span>SKS</span>
+                <input id="courseSks" type="number" min="1" max="6" value="3" aria-describedby="errorSks" />
+                <small id="errorSks" class="error-msg" aria-live="polite"></small>
+              </label>
+            </div>
+
+            <button type="submit" class="primary-btn" id="submitBtn">Simpan Mata Kuliah</button>
+          </form>
+
+          <div class="panel-head">
+            <div>
+              <h3>Daftar matkul</h3>
+              <p id="taskCount">Belum ada data</p>
+            </div>
+            <button type="button" id="resetBtn" class="ghost-btn">Reset semua</button>
+          </div>
+
+          <div id="emptyState" class="empty-state" aria-live="polite">
+            <svg viewBox="0 0 80 80" class="empty-svg" aria-hidden="true">
+              <rect x="18" y="14" width="44" height="52" rx="8" />
+              <path d="M30 30h20M30 42h20M30 54h12" />
+            </svg>
+            <p>Belum ada mata kuliah yang ditambahkan.</p>
+          </div>
+
+          <ul id="courseList" class="course-list" aria-live="polite"></ul>
+        </section>
+
+        <section class="page-panel" id="statsPage" aria-labelledby="statsHeading" hidden>
+          <div class="page-intro">
+            <h2 id="statsHeading">Statistik IPK</h2>
+            <p class="intro-copy">Lihat ringkasan IPK, total SKS, dan sebaran nilai mata kuliah.</p>
+          </div>
+
+          <div class="student-summary">
+            <p class="eyebrow mini">DATA MAHASISWA</p>
+            <div class="student-summary-grid">
+              <div>
+                <span>Nama</span>
+                <strong id="statsStudentName">Belum diisi</strong>
+              </div>
+              <div>
+                <span>NRP</span>
+                <strong id="statsStudentNrp">Belum diisi</strong>
+              </div>
+            </div>
+          </div>
+
+          <div class="stats-grid">
+            <article class="stat-card accent">
+              <span>Total SKS</span>
+              <strong id="totalSks">0</strong>
+            </article>
+            <article class="stat-card mint">
+              <span>IPK</span>
+              <strong id="ipkValue">0.00</strong>
+            </article>
+            <article class="stat-card golden">
+              <span>Jumlah matkul</span>
+              <strong id="matkulCount">0</strong>
+            </article>
+          </div>
+
+          <div class="grade-card">
+            <p class="eyebrow mini">DISTRIBUSI NILAI</p>
+            <h3>Sebaran Nilai</h3>
+            <ul id="gradeDistribution" class="grade-distribution" aria-label="Sebaran nilai mata kuliah"></ul>
+            <p id="gradeCaption" class="progress-caption">Tambahkan mata kuliah untuk melihat sebaran nilai.</p>
+          </div>
+          <aside class="motivation-card" aria-label="Motivasi belajar">
+            <img class="growth-illustration" src="growth-illustration.svg" alt="" />
+            <div class="motivation-copy">
+              <p class="eyebrow mini">LANGKAH KECIL, HASIL BESAR</p>
+              <h3>Terus bertumbuh!</h3>
+              <p>Setiap mata kuliah yang kamu selesaikan adalah satu langkah menuju cita-citamu. Tetap konsisten dan rayakan setiap kemajuan.</p>
+            </div>
+          </aside>
+        </section>
+
+        <section class="page-panel profile-page" id="profilePage" aria-labelledby="profileHeading" hidden>
+          <div class="profile-card">
+            <div class="profile-banner" aria-hidden="true"></div>
+            <img class="avatar" src="profile-avatar.svg" alt="Foto profil mahasiswa" />
+            <div class="profile-body">
+              <p class="eyebrow">PROFIL</p>
+              <h2 id="profileHeading">Nama mahasiswa</h2>
+              <p class="profile-role">Mahasiswa Politeknik Elektronika Negeri Surabaya</p>
+
+              <form id="profileForm" class="profile-form" novalidate>
+                <label class="field-group">
+                  <span>Nama mahasiswa</span>
+                  <input id="profileName" type="text" maxlength="60" placeholder="Masukkan nama lengkap" autocomplete="name" required />
+                </label>
+                <label class="field-group">
+                  <span>NRP</span>
+                  <input id="profileNrp" type="text" maxlength="20" placeholder="Masukkan NRP" autocomplete="off" required />
+                </label>
+                <button type="submit" class="primary-btn">Simpan Profil</button>
+                <p id="profileMessage" class="profile-message" aria-live="polite"></p>
+              </form>
+
+              <p class="profile-note">
+                Lengkapi Nama dan NRP agar informasi mahasiswa tersimpan di profil.
+              </p>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <nav class="bottom-nav" aria-label="Navigasi utama">
+        <button type="button" class="nav-btn" data-page="profile" aria-current="false">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3.5" /><path d="M5 20a7 7 0 0 1 14 0" /></svg>
+          <span>Profil</span>
+        </button>
+        <button type="button" class="nav-btn is-current" data-page="tasks" aria-current="page">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 6h12M8 12h12M8 18h12M3.5 6h.01M3.5 12h.01M3.5 18h.01" /></svg>
+          <span>Mata Kuliah</span>
+        </button>
+        <button type="button" class="nav-btn" data-page="stats">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19V5m0 14h17M9 15V9m6 6V5m3 14v-8" /></svg>
+          <span>Statistik</span>
+        </button>
+      </nav>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
