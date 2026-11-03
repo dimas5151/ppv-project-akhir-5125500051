@@ -440,10 +440,11 @@ main {
 }
 
 .stat-card {
-  padding: 18px 16px;
-  border: 1px solid var(--line);
-  border-radius: 18px;
-  background: rgba(255, 255, 255, 0.7);
+  --bs-card-spacer-y: 18px;
+  --bs-card-spacer-x: 16px;
+  --bs-card-border-color: var(--line);
+  --bs-card-border-radius: 18px;
+  --bs-card-bg: rgba(255, 255, 255, 0.7);
   box-shadow: var(--shadow);
 }
 
