@@ -380,6 +380,7 @@ function addCourse() {
   courseSksInput.value = '3';
   updateGradePreview(false, false);
   renderCourseList(course.id);
+  tampilkanToast('Mata kuliah tersimpan');
 }
 
 function resetAllCourses() {

@@ -13,3 +13,9 @@ function bukaKonfirmasiReset(onYa) {
 
   modal.show();
 }
+
+function tampilkanToast(pesan) {
+  const el = document.querySelector('#toastNotif');
+  el.querySelector('#toastPesan').textContent = pesan;
+  bootstrap.Toast.getOrCreateInstance(el, { delay: 2500 }).show();
+}
