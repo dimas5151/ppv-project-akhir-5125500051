@@ -384,12 +384,12 @@ function addCourse() {
 
 function resetAllCourses() {
   if (!courses.length) return;
-  const shouldReset = window.confirm('Yakin ingin menghapus semua data matkul?');
-  if (!shouldReset) return;
 
-  courses = [];
-  saveCourses();
-  renderCourseList();
+  bukaKonfirmasiReset(() => {
+    courses = [];
+    saveCourses();
+    renderCourseList();
+  });
 }
 
 form.addEventListener('submit', (event) => {

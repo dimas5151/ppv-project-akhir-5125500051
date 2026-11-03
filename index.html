@@ -185,7 +185,26 @@
       </nav>
     </div>
 
+    <div class="modal fade" id="modalReset" tabindex="-1" aria-labelledby="judulModalReset" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h2 class="modal-title fs-5" id="judulModalReset">Hapus semua mata kuliah?</h2>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
+          </div>
+          <div class="modal-body">
+            Semua data mata kuliah akan dihapus dan tidak bisa dikembalikan.
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+            <button type="button" class="btn btn-danger" id="konfirmasiReset">Ya, hapus semua</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="src/ui-pustaka.js"></script>
     <script src="src/script.js"></script>
   </body>
 </html>
