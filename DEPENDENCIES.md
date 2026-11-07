@@ -47,7 +47,7 @@ Daftar pustaka pihak ketiga yang dipakai proyek ini.
 - *Waktu mempelajari:* singkat, karena hanya tiga komponen dan dokumentasinya jelas.
 
 **3. Pemeliharaan**
-- *Rilis terakhir:* seri 5.3 masih dirawat; versi yang dipakai dikunci pada 5.3.3. [Cek tanggal rilis di halaman rilis resmi sebelum dikumpulkan.]
+- *Rilis terakhir:* versi yang dipakai (5.3.3) dirilis 20 Februari 2024 dan dikunci pada nomor itu; seri 5.3 masih dirawat dan dokumentasi resminya masih tersedia.
 - *Dokumentasi:* lengkap di getbootstrap.com/docs/5.3.
 - *Bila berhenti dikembangkan:* panggilan JavaScript terkumpul di satu berkas, sehingga penggantian pustaka terlokalisasi (lihat "Rencana bila dilepas").
 
