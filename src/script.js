@@ -263,10 +263,11 @@ function renderSummary() {
 
 function renderGradeDistribution() {
   const grades = [
-    { label: 'A', description: 'Sangat baik', matches: (grade) => grade >= 3.5 },
-    { label: 'B', description: 'Baik', matches: (grade) => grade >= 2.5 && grade < 3.5 },
-    { label: 'C', description: 'Cukup', matches: (grade) => grade >= 1.5 && grade < 2.5 },
-    { label: 'D', description: 'Tidak lulus', matches: (grade) => grade < 1.5 }
+    { label: 'A / A-', description: 'Sangat baik', matches: (grade) => grade >= 3.75 },
+    { label: 'AB / B+', description: 'Baik', matches: (grade) => grade >= 3.25 && grade < 3.75 },
+    { label: 'B / BC', description: 'Cukup', matches: (grade) => grade >= 2.5 && grade < 3.25 },
+    { label: 'C', description: 'Lebih dari cukup', matches: (grade) => grade >= 2.0 && grade < 2.5 },
+    { label: 'D', description: 'Tidak lulus', matches: (grade) => grade < 2.0 }
   ];
 
   gradeDistributionEl.replaceChildren();
