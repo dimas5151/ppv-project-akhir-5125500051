@@ -22,6 +22,7 @@ Tidak perlu instalasi.
 - [Project charter](docs/CHARTER.md): masalah, persona, fitur MVP, kriteria sukses, risiko
 - [Roadmap P10–P14](docs/ROADMAP.md): rencana sprint dan bukti per minggu
 - [Dependencies](DEPENDENCIES.md): pustaka UI yang dipakai, versi, ukuran, dan alasannya
+- [Module map](MODULE_MAP.md): peta modul ES dan alur dependensi aplikasi
 
 ## Struktur folder
 
@@ -29,14 +30,15 @@ Tidak perlu instalasi.
 .
 ├── index.html
 ├── DEPENDENCIES.md
-├── src/          # style.css, script.js, ui-pustaka.js
-├── assets/       # gambar SVG
-└── docs/         # CHARTER.md, ROADMAP.md
+├── MODULE_MAP.md
+├── src/          # style.css, main.js, state.js, storage.js, ui.js, ui-pustaka.js
+├── assets/       # gambar SVG dan manifest
+└── docs/         # CHARTER.md, DEBUG_LOG.md, ROADMAP.md
 ```
 
 ## Status
 
-Sprint 1 (P09) selesai: charter, roadmap, struktur repositori, dan pemasangan Bootstrap 5.3.3 (Modal, Toast, Card) lewat satu berkas pembungkus `src/ui-pustaka.js`.
+Sprint 3 (P11) selesai: kode dipecah menjadi modul ES (`src/storage.js`, `src/state.js`, `src/ui.js`, `src/main.js`) beserta `MODULE_MAP.md` dan telah di-*merge* ke `main`.
 
 ## Sumber dan bantuan
 
