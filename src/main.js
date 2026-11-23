@@ -37,9 +37,18 @@ let activeName = '';
 let activeNrp = '';
 let courses = [];
 
+function notifyStorageIssue(message) {
+  if (typeof window.tampilkanToast === 'function') {
+    window.tampilkanToast(message);
+  }
+}
+
 function handleDeleteCourse(courseId, cardElement) {
   courses = removeCourseById(courses, courseId);
-  writeStoredCourses(courses, activeName, activeNrp);
+  const tersimpan = writeStoredCourses(courses, activeName, activeNrp);
+  if (!tersimpan) {
+    notifyStorageIssue('Perubahan belum tersimpan permanen ke penyimpanan browser.');
+  }
   renderSummary(dom, courses);
   animateRemoveCard(cardElement, () => {
     renderCourseList(dom, courses, { onDeleteCourse: handleDeleteCourse });
@@ -59,7 +68,7 @@ function handleAddCourse() {
   });
 
   courses = addCourseToList(courses, course);
-  writeStoredCourses(courses, activeName, activeNrp);
+  const tersimpan = writeStoredCourses(courses, activeName, activeNrp);
   resetCourseForm(dom);
   renderCourseList(dom, courses, {
     newCourseId: course.id,
@@ -67,7 +76,11 @@ function handleAddCourse() {
   });
 
   if (typeof window.tampilkanToast === 'function') {
-    window.tampilkanToast('Mata kuliah tersimpan');
+    window.tampilkanToast(
+      tersimpan
+        ? 'Mata kuliah tersimpan'
+        : 'Mata kuliah tampil di sesi ini, namun gagal disimpan permanen.'
+    );
   }
 }
 
@@ -77,7 +90,10 @@ function handleResetAllCourses() {
   if (typeof window.bukaKonfirmasiReset === 'function') {
     window.bukaKonfirmasiReset(() => {
       courses = clearCoursesList();
-      writeStoredCourses(courses, activeName, activeNrp);
+      const tersimpan = writeStoredCourses(courses, activeName, activeNrp);
+      if (!tersimpan) {
+        notifyStorageIssue('Reset belum tersimpan permanen ke penyimpanan browser.');
+      }
       renderCourseList(dom, courses, { onDeleteCourse: handleDeleteCourse });
     });
   }
@@ -109,7 +125,7 @@ function handleProfileSubmit(event) {
       }
     }
 
-    writeStoredProfile({ name, nrp });
+    const profilTersimpan = writeStoredProfile({ name, nrp });
     activeName = name;
     activeNrp = nrp;
     courses = nextCourses;
@@ -117,7 +133,12 @@ function handleProfileSubmit(event) {
     updateStatsProfile(dom, name, nrp);
     renderCourseList(dom, courses, { onDeleteCourse: handleDeleteCourse });
     openPage(dom, 'tasks');
-    setProfileMessage(dom, 'Profil berhasil disimpan.');
+    setProfileMessage(
+      dom,
+      profilTersimpan
+        ? 'Profil berhasil disimpan.'
+        : 'Profil aktif di sesi ini, namun gagal disimpan permanen.'
+    );
   } catch (error) {
     console.error('Gagal menyimpan data profil:', error);
     setProfileMessage(dom, 'Profil gagal disimpan. Periksa penyimpanan browser.');

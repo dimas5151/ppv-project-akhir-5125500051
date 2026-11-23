@@ -1,3 +1,4 @@
+import { createCourseCard } from './komponen.js';
 import {
   buildGradeDistribution,
   calculateIpk,
@@ -232,7 +233,7 @@ export function renderSummary(dom, courses) {
 }
 
 export function renderCourseList(dom, courses, { newCourseId = null, onDeleteCourse } = {}) {
-  dom.courseList.innerHTML = '';
+  dom.courseList.replaceChildren();
 
   if (!courses.length) {
     dom.emptyState.hidden = false;
@@ -247,34 +248,7 @@ export function renderCourseList(dom, courses, { newCourseId = null, onDeleteCou
   const orderedCourses = [...courses].reverse();
 
   orderedCourses.forEach((course) => {
-    const item = document.createElement('li');
-    item.className = 'course-item';
-    item.dataset.id = course.id;
-
-    const nameWrap = document.createElement('div');
-    nameWrap.className = 'course-name';
-    const title = document.createElement('strong');
-    title.textContent = course.name;
-    const meta = document.createElement('small');
-    meta.textContent = `${course.sks} SKS • ${course.grade.toFixed(1)}`;
-    nameWrap.append(title, meta);
-
-    const actions = document.createElement('div');
-    actions.className = 'course-actions';
-    const deleteBtn = document.createElement('button');
-    deleteBtn.type = 'button';
-    deleteBtn.className = 'delete-btn';
-    deleteBtn.textContent = 'Hapus';
-    deleteBtn.setAttribute('aria-label', `Hapus mata kuliah ${course.name}`);
-    deleteBtn.addEventListener('click', () => {
-      deleteBtn.disabled = true;
-      if (typeof onDeleteCourse === 'function') {
-        onDeleteCourse(course.id, item);
-      }
-    });
-
-    actions.appendChild(deleteBtn);
-    item.append(nameWrap, actions);
+    const item = createCourseCard(course, { onDelete: onDeleteCourse });
     dom.courseList.appendChild(item);
 
     if (newCourseId && course.id === newCourseId) {
